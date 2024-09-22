@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Mono } from "next/font/google";
-import "./globals.css";
+import ".././globals.css";
+import Sidebar from "@/components/Sidebar";
 
 const NotoSansMono = Noto_Sans_Mono({
   subsets: ["latin"],
@@ -18,7 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={NotoSansMono.className}>
-      <body className="antialiased bg-[#F5F5F5]">{children}</body>
+      <body className="antialiased">
+        <header>
+          <Sidebar />
+        </header>
+
+        {children}
+      </body>
     </html>
   );
 }
+
