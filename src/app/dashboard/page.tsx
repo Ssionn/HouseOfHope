@@ -6,8 +6,7 @@ import ActiveSurveyParticipation from "@/components/ActiveSurveyParticipation";
 
 export default function Home() {
   return (
-    <div>
-      <main className="ml-60 p-6">
+      <div className="ml-60 p-6">
         <div className="flex justify-between items-center">
           <div className="inline-flex">
             <h1 className="text-4xl font-bold">Welcome</h1>
@@ -80,7 +79,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
   );
 }

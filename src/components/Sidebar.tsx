@@ -3,7 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import classNames from "classNames";
+import {
+  FaCircleQuestion,
+  FaHouse,
+  FaUsers,
+  FaUserGear,
+} from "react-icons/fa6";
 
 const Navlink = ({ href, children, className = "" }) => {
   const pathname = usePathname();
@@ -16,7 +21,7 @@ const Navlink = ({ href, children, className = "" }) => {
           isActive ? "bg-[#F5F5F5]" : "hover:bg-[#F5F5F5]"
         } ${className}`}
       >
-        <span>{children}</span>
+        <span className="inline-flex items-center">{children}</span>
       </div>
     </Link>
   );
@@ -39,14 +44,26 @@ export default function Sidebar() {
           </div>
           <div className="mt-12">
             <div className="flex flex-col space-y-2">
-              <Navlink href="/dashboard">Dashboard</Navlink>
-              <Navlink href="/dashboard/teams">Teams</Navlink>
+              <Navlink href="/dashboard">
+                <FaHouse className="mr-2" />
+                Dashboard
+              </Navlink>
+              <Navlink href="/dashboard/teams">
+                <FaUsers className="mr-2" />
+                Teams
+              </Navlink>
             </div>
             <hr className="px-2 mt-2 bg-[#F5F5F5]" />
-            <Navlink href="/dashboard/faq" className="mt-2">Help/FAQ</Navlink>
+            <Navlink href="/dashboard/faq" className="mt-2">
+              <FaCircleQuestion className="mr-2" />
+              Help/FAQ
+            </Navlink>
           </div>
           <div className="absolute bottom-0 mb-4 w-56">
-            <Navlink href="/dashboard/settings">Account Settings</Navlink>
+            <Navlink href="/dashboard/settings">
+              <FaUserGear className="mr-2" />
+              Account Settings
+            </Navlink>
           </div>
         </div>
       </div>

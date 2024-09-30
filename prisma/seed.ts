@@ -17,7 +17,8 @@ async function main() {
                     where: { email: 'casper@houseofhope.com' },
                     update: {},
                     create: {
-                        name: 'Casper',
+                        firstname: 'Casper',
+                        lastname: 'Kizewski',
                         email: 'casper@houseofhope.com',
                         password: hash,
                         role: "admin",
@@ -28,7 +29,8 @@ async function main() {
                     where: { email: 'andy@houseofhope.com' },
                     update: {},
                     create: {
-                        name: 'Andy',
+                        firstname: 'Andy',
+                        lastname: 'Hoang',
                         email: 'andy@houseofhope.com',
                         password: hash,
                         role: "admin",
@@ -39,7 +41,8 @@ async function main() {
                     where: { email: 'ivano@houseofhope.com' },
                     update: {},
                     create: {
-                        name: 'Ivano',
+                        firstname: 'Ivano',
+                        lastname: 'Baptista',
                         email: 'ivano@houseofhope.com',
                         password: hash,
                         role: "admin",
