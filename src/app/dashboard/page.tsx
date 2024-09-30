@@ -50,7 +50,7 @@ export default function Home() {
         </div>
 
         <div className="mt-12">
-          <div className="grid grid-cols-3 gap-4 items-start">
+          <div className="flex flex-col sm:grid sm:grid-cols-3 sm:gap-4 items-start">
             <div className="col-span-1 bg-white rounded-lg p-2">
               <span className="font-semibold text-xl p-4">
                 Team Composition

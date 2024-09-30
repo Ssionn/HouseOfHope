@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "House of Hope",
 };
 
-export default function RootLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -24,7 +24,9 @@ export default function RootLayout({
           <Sidebar />
         </header>
 
-        {children}
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
