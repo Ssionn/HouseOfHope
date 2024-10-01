@@ -1,5 +1,4 @@
-// components/BarChart.js
-import { Bar } from 'react-chartjs-2';
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,7 +7,7 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -16,16 +15,16 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const data = {
-  labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+  labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
   datasets: [
     {
-      label: 'Completion Percentage',
+      label: "Completion Percentage",
       data: [75, 50, 90, 65, 80],
-      backgroundColor: 'rgba(54, 162, 235, 0.6)',
+      backgroundColor: "rgba(54, 162, 235, 0.6)",
     },
   ],
 };
@@ -34,7 +33,7 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'bottom',
+      position: "bottom",
     },
   },
   scales: {
@@ -45,9 +44,6 @@ const options = {
   },
 };
 
-export default function ActiveSurveyParticipation () {
-  return (
-    <Bar data={data} options={options} />
-  );
+export default function ActiveSurveyParticipation() {
+  return <Bar data={data} options={options} />;
 }
-

@@ -1,17 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getSession } from "@/Actions";
+import LogoutForm from "./LogoutForm";
 
 const NavigationLink = ({ href, children }) => {
   return (
     <li>
       <Link href={href}>
-        <a className="text-lg underline font-semibold">{children}</a>
+        <span className="text-lg underline font-semibold">{children}</span>
       </Link>
     </li>
   );
 };
 
-export default function Navigation() {
+export default async function Navigation() {
+  const session = await getSession();
   return (
     <div className="px-4 sm:px-12 md:px-24 lg:px-36">
       <div className="flex justify-between items-center h-16 w-full mt-20 px-4 sm:px-12 md:px-16 lg:px-24">
@@ -24,8 +27,14 @@ export default function Navigation() {
           />
         </div>
         <div>
-          <ul>
-            <NavigationLink href="/dashboard">Dashboard</NavigationLink>
+          <ul className="flex flex-row items-center space-x-4">
+            {!session.isLoggedIn && (
+              <>
+                <NavigationLink href="/login">Login</NavigationLink>
+                <NavigationLink href="/signup">Sign up</NavigationLink>
+              </>
+            )}
+            {session.isLoggedIn && <LogoutForm />}
           </ul>
         </div>
       </div>

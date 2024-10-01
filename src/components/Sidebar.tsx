@@ -25,7 +25,7 @@ export default function Sidebar() {
   return (
     <>
       <div className="m-0 p-0 fixed w-60 rounded-br-lg bg-white h-full overflow-auto border-r">
-        <div className="relative h-full p-2">
+        <div className="h-full p-2">
           <div className="flex justify-center items-center">
             <Link href="/" className="mt-4">
               <Image
@@ -42,10 +42,9 @@ export default function Sidebar() {
               <Navlink href="/dashboard/teams">Teams</Navlink>
             </div>
             <hr className="px-2 mt-2 bg-[#F5F5F5]" />
-            <Navlink href="/dashboard/faq" className="mt-2">Help/FAQ</Navlink>
-          </div>
-          <div className="absolute bottom-0 mb-4 w-56">
-            <Navlink href="/dashboard/settings">Account Settings</Navlink>
+            <Navlink href="/dashboard/faq" className="mt-2">
+              Help/FAQ
+            </Navlink>
           </div>
         </div>
       </div>
