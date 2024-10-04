@@ -1,38 +1,22 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-
-const Navlink = ({ href, children, className = "" }) => {
-  const pathname = usePathname();
-  const isActive = pathname === href;
-
-  return (
-    <Link href={href}>
-      <div
-        className={`w-full px-4 py-2 rounded ${
-          isActive ? "bg-[#F5F5F5]" : "hover:bg-[#F5F5F5]"
-        } ${className}`}
-      >
-        <span>{children}</span>
-      </div>
-    </Link>
-  );
-};
+import UserDropdown from "./UserDropdown";
+import DashboardHeader from "./DashboardHeader";
+import Navlink from "@/components/Navlink";
 
 export default function Sidebar() {
   return (
     <>
       <div className="m-0 p-0 fixed w-60 rounded-br-lg bg-white h-full overflow-auto border-r">
-        <div className="h-full p-2">
+        <div className="w-full p-2">
           <div className="flex justify-center items-center">
-            <Link href="/" className="mt-4">
+            <Link href="/" aria-label="Home" className="mt-4">
               <Image
                 src="/images/logo.svg"
                 width={64}
                 height={64}
                 alt="House of Hope"
+                className="cursor-pointer"
               />
             </Link>
           </div>
@@ -47,6 +31,11 @@ export default function Sidebar() {
             </Navlink>
           </div>
         </div>
+      </div>
+
+      <div className="w-full flex justify-between p-6">
+        <DashboardHeader />
+        <UserDropdown />
       </div>
     </>
   );

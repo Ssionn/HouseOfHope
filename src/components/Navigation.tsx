@@ -30,8 +30,8 @@ export default async function Navigation() {
           <ul className="flex flex-row items-center space-x-4">
             {!session.isLoggedIn && (
               <>
-                <NavigationLink href="/login">Login</NavigationLink>
-                <NavigationLink href="/signup">Sign up</NavigationLink>
+                <NavigationLink href="/login">Inloggen</NavigationLink>
+                <NavigationLink href="/signup">Aanmelden</NavigationLink>
               </>
             )}
             {session.isLoggedIn && <LogoutForm />}
