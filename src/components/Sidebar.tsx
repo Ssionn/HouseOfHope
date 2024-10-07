@@ -10,7 +10,7 @@ import {
   FaUserGear,
 } from "react-icons/fa6";
 
-const Navlink = ({ href, children, className = "" }) => {
+const Navlink = ({ href, children, extraClasses = "" }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 
@@ -19,7 +19,7 @@ const Navlink = ({ href, children, className = "" }) => {
       <div
         className={`w-full px-4 py-2 rounded ${
           isActive ? "bg-[#F5F5F5]" : "hover:bg-[#F5F5F5]"
-        } ${className}`}
+        } ${extraClasses}`}
       >
         <span className="inline-flex items-center">{children}</span>
       </div>
@@ -54,7 +54,7 @@ export default function Sidebar() {
               </Navlink>
             </div>
             <hr className="px-2 mt-2 bg-[#F5F5F5]" />
-            <Navlink href="/dashboard/faq" className="mt-2">
+            <Navlink href="/dashboard/faq" extraClasses="mt-2">
               <FaCircleQuestion className="mr-2" />
               Help/FAQ
             </Navlink>
