@@ -65,6 +65,13 @@ model Option {
   questionId Int
 }
 
+model Faq {
+  id              Int    @id @default(autoincrement())
+  faq_question    String
+  faq_description String @db.VarChar(2000)
+  faq_role        Role
+}
+
 enum Role {
   admin
   team_leader
