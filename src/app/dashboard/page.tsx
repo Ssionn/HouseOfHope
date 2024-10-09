@@ -1,8 +1,6 @@
-"use client";
-
 import Timeline from "@/components/Timeline";
-import TeamComposition from "@/components/TeamComposition";
 import ActiveSurveyParticipation from "@/components/ActiveSurveyParticipation";
+import TeamComposition from "@/components/TeamComposition";
 
 export default function Home() {
   return (
