@@ -12,8 +12,8 @@ export default function Team() {
                     height={48}
                 />
                 <div className="flex flex-col">
-                    <h1 className="text-lg font-semibold">House of Hope</h1>
-                    <p className="text-sm">The house of jesus christ</p>
+                    <h1 className="text-lg font-semibold"></h1>
+                    <p className="text-sm"></p>
                 </div>
             </div>
         </div>

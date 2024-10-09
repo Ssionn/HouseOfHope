@@ -14,7 +14,7 @@ const Navlink = ({ href, children, className = "" }) => {
           isActive ? "bg-[#F5F5F5]" : "hover:bg-[#F5F5F5]"
         } ${className}`}
       >
-        <span>{children}</span>
+        <span className="flex flex-row items-center">{children}</span>
       </div>
     </Link>
   );

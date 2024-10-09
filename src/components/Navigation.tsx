@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getSession } from "@/Actions";
+import { getSession } from "../../actions/authentication";
 import LogoutForm from "./LogoutForm";
 
 const NavigationLink = ({ href, children }) => {

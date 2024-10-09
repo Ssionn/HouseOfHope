@@ -12,7 +12,7 @@ const TimelineItem = ({ time, name, action }) => (
 
 export default function Timeline() {
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md mx-auto ml-4">
       <TimelineItem
         time="3 minuten geleden"
         name="Jelle"

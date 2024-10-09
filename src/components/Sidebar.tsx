@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import UserDropdown from "./UserDropdown";
-import DashboardHeader from "./DashboardHeader";
 import Navlink from "@/components/Navlink";
 import {FaHouse, FaUsers} from "react-icons/fa6";
 
@@ -38,11 +36,6 @@ export default function Sidebar() {
             </Navlink>
           </div>
         </div>
-      </div>
-
-      <div className="w-full flex justify-between p-6">
-        <DashboardHeader />
-        <UserDropdown />
       </div>
     </>
   );

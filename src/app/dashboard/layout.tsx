@@ -1,7 +1,6 @@
 import { Noto_Sans_Mono } from "next/font/google";
 import ".././globals.css";
 import Sidebar from "@/components/Sidebar";
-import { NextUIProvider } from "@nextui-org/react";
 
 const NotoSansMono = Noto_Sans_Mono({
   subsets: ["latin"],
@@ -16,11 +15,9 @@ export default async function DashboardLayout({
   return (
     <html lang="en" className={NotoSansMono.className}>
       <body>
-        <NextUIProvider>
           <Sidebar />
 
           {children}
-        </NextUIProvider>
       </body>
     </html>
   );

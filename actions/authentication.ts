@@ -14,15 +14,15 @@ export const getSession = async () => {
     session.isLoggedIn = defaultSession.isLoggedIn;
   }
 
-  return session;
+  return { ...session };
 };
+
+const session = await getSession();
 
 export const login = async (
   prevState: { error: undefined | string },
   formData: FormData,
 ) => {
-  const session = await getSession();
-
   const formEmail = formData.get("email") as string;
   const formPassword = formData.get("password") as string;
 
@@ -47,8 +47,6 @@ export const signup = async (
   prevState: { error: undefined | string },
   formData: FormData,
 ) => {
-  const session = await getSession();
-
   const formFirstname = formData.get("firstname") as string;
   const formLastname = formData.get("lastname") as string;
   const formEmail = formData.get("email") as string;
@@ -73,8 +71,6 @@ export const signup = async (
 };
 
 export const logout = async () => {
-  const session = await getSession();
-
   session.destroy();
 
   redirect("/");

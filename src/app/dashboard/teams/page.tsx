@@ -1,16 +1,14 @@
 "use client";
 
 import TeamInfo from "@/components/TeamInfo";
+import Header from "@/components/Header";
 
 export default function teams() {
     return (
         <>
             <div className="ml-60 p-6">
-                <h1 className="text-4xl font-semibold">Teams</h1>
-            </div>
-
-            <div className="ml-60 p-6">
-                <div className="flex flex-col sm:flex-row space-x-4 items-center">
+                <Header title="Teams" subtitle=""/>
+                <div className="flex flex-col sm:flex-row space-x-4 items-center mt-4">
                     <TeamInfo />
                 </div>
             </div>
