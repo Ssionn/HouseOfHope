@@ -4,7 +4,6 @@ import TeamInfo from "@/components/TeamInfo";
 
 export default function teams() {
     return (
-        // Change this to the Header component later on
         <>
             <div className="ml-60 p-6">
                 <h1 className="text-4xl font-semibold">Teams</h1>

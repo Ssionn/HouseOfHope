@@ -61,7 +61,66 @@ async function main() {
     });
 }
 
+async function teamSeed() {
+    try {
+        const casper = await prisma.user.findUnique({ where: { email: 'casper@houseofhope.com' } });
+        const andy = await prisma.user.findUnique({ where: { email: 'andy@houseofhope.com' } });
+        const ivano = await prisma.user.findUnique({ where: { email: 'ivano@houseofhope.com' } });
+
+        const developmentTeam = await prisma.team.upsert({
+            where: { name: 'Development Team' },
+            update: {},
+            create: {
+                name: 'Development Team',
+                description: 'Team responsible for product development.',
+                leader: { connect: { id: casper?.id } }
+            },
+        });
+
+        if (casper) {
+            await prisma.user.update({
+                where: { id: casper.id },
+                data: {
+                    team: { connect: { id: developmentTeam.id } },
+                    teamRole: 'team_leader',
+                },
+            });
+        }
+
+        await prisma.user.update({
+            where: { id: ivano?.id },
+            data: {
+                team: { connect: { id: developmentTeam.id } },
+                teamRole: 'member',
+            },
+        });
+
+        await prisma.user.update({
+            where: { id: andy?.id },
+            data: {
+                team: { connect: { id: developmentTeam.id } },
+                teamRole: 'member',
+            },
+        });
+
+        console.log('Team created/updated:', developmentTeam);
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
 main()
+    .catch((e) => {
+        console.error(e);
+        process.exit(1);
+    })
+    .finally(async () => {
+        await prisma.$disconnect();
+    });
+
+teamSeed()
     .catch((e) => {
         console.error(e);
         process.exit(1);
