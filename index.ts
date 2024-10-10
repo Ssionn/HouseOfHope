@@ -1,5 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import {Prisma, PrismaClient} from "@prisma/client";
 import bcrypt from "bcrypt";
+import IntFilter = Prisma.IntFilter;
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,25 @@ export async function checkUserExists(email: string) {
   }
 
   return user;
+}
+
+export async function getUserTeamWithTeamLeader(
+    teamId: number | IntFilter<"Team">,
+) {
+  const team = await prisma.team.findFirst({
+    where: { id: teamId },
+    include: {
+      leader: {
+        select: {
+          firstname: true,
+          lastname: true,
+          email: true,
+        }
+      }
+    }
+  });
+
+  return team;
 }
 
 export async function createNewUser(

@@ -1,3 +1,5 @@
+"use client";
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -5,16 +7,12 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import { FaBell, FaUser } from "react-icons/fa6";
-import {logout} from "../../actions/authentication";
 import Link from "next/link";
+import {logout} from "../../actions/authentication";
 
 export default function UserDropdown({ session }) {
-    if (!session) {
-        return null;
-    }
-
     return (
         <div className="inline-flex space-x-4 items-center">
             <div>
@@ -25,14 +23,14 @@ export default function UserDropdown({ session }) {
                     <FaUser />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuLabel>{session.firstname + " " + session.lastname}</DropdownMenuLabel>
+                    <DropdownMenuLabel>{session?.name}</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <Link href="/dashboard/settings">
                         <DropdownMenuItem className="cursor-pointer">
                             Settings
                         </DropdownMenuItem>
                     </Link>
-                    <DropdownMenuItem onClick={async () => await logout()} className="cursor-pointer">
+                    <DropdownMenuItem onClick={async () => logout()} className="cursor-pointer">
                         Logout
                     </DropdownMenuItem>
                 </DropdownMenuContent>

@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
       setLoading(false);
-  });
+  }, []);
 
   if (loading) {
     return (
@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-      <div className="ml-60 p-6">
+      <div className="ml-60 p-6 min-h-screen">
         <Header title="Dashboard" subtitle=""/>
         <div className="mt-4">
           <div className="flex flex-col sm:grid sm:grid-cols-12 sm:gap-4 items-start">
@@ -37,17 +37,16 @@ export default function Home() {
             </div>
             <div className="col-span-5 bg-white rounded p-2 shadow-md">
               <div className="flex flex-col p-4">
-                <span className="font-semibold text-xl">
+                <span className="font-semibold text-xl p-4">
                   Active Survey Participation
                 </span>
-                <span className="italic text-xs">*based on all teams</span>
               </div>
               <div className="mt-4">
                 <ActiveSurveyParticipation />
               </div>
             </div>
             <div className="col-span-3 bg-white rounded-lg p-2 shadow-md">
-              <span className="font-semibold text-xl p-2">
+              <span className="font-semibold text-xl p-4">
                 Most Recent Activity
               </span>
               <div className="mt-4">

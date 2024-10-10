@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
-import { getSession } from "./actions/authentication";
+import {NextRequest, NextResponse} from 'next/server';
+import { getSessionAsPlainObject } from "./actions/authentication";
 
-export async function middleware(req) {
-    const session = await getSession();
+export async function middleware(req: NextRequest) {
+    const session = await getSessionAsPlainObject();
 
     if (! session.isLoggedIn) {
         return NextResponse.redirect(new URL('/login', req.url))

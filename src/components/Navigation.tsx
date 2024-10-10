@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getSession } from "../../actions/authentication";
+import {getSessionAsPlainObject} from "../../actions/authentication";
 import LogoutForm from "./LogoutForm";
 
 const NavigationLink = ({ href, children }) => {
@@ -14,7 +14,7 @@ const NavigationLink = ({ href, children }) => {
 };
 
 export default async function Navigation() {
-  const session = await getSession();
+  const session = await getSessionAsPlainObject();
   return (
     <div className="px-4 sm:px-12 md:px-24 lg:px-36">
       <div className="flex justify-between items-center h-16 w-full mt-20 px-4 sm:px-12 md:px-16 lg:px-24">

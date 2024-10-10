@@ -1,3 +1,5 @@
+"use client";
+
 const TimelineItem = ({ time, name, action }) => (
   <div className="relative flex items-start mb-4">
     <div className="absolute flex justify-center items-center h-full border-l-[3px] border-purple-300"></div>
