@@ -12,7 +12,7 @@ import { FaBell, FaUser } from "react-icons/fa6";
 import Link from "next/link";
 import {logout} from "../../actions/authentication";
 
-export default function UserDropdown({ session }) {
+export default function UserDropdown({ session }: { session: { name: string } }) {
     return (
         <div className="inline-flex space-x-4 items-center">
             <div>

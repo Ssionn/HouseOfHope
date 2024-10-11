@@ -15,7 +15,9 @@ export const getSessionAsPlainObject = async () => {
     }
 
     const {userId, firstname, lastname, email, team, isLoggedIn} = session;
-    return {userId, firstname, lastname, email, team, isLoggedIn};
+    const plainSessionObject = {userId, firstname, lastname, email, team, isLoggedIn};
+
+    return plainSessionObject;
 };
 
 const updateSessionFromPlainObject = async (sessionData: Partial<SessionData>) => {

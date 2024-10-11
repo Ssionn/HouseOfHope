@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-export default function Team({ team_name }) {
-
+export default function Team({ team_name }: { team_name: string | null | undefined }) {
     return (
         <div className="mt-4">
             <div className="flex flex-row space-x-2 items-center">

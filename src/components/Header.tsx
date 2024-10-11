@@ -2,8 +2,10 @@ import {useEffect, useState} from 'react';
 import {getSessionAsPlainObject} from "../../actions/authentication";
 import UserDropdown from "@/components/UserDropdown";
 
-export default function Header({ title, subtitle }) {
-    const [session, setSession] = useState(null);
+export default function Header({ title, subtitle }: { title: string, subtitle: string }) {
+    const [session, setSession] = useState(
+        { name: "" }
+    );
 
     useEffect(() => {
         async function getSessionData() {

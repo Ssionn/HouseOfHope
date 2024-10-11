@@ -1,4 +1,4 @@
-export default function TeamDescription({ team_description }) {
+export default function TeamDescription({ team_description }: { team_description: string | null | undefined }) {
     return (
         <div className="bg-gray-100 rounded-lg p-4 w-full">
             <h1 className="text-xl font-semibold">Team Description</h1>

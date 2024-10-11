@@ -23,11 +23,11 @@ export default function Home() {
   }
 
   return (
-      <div className="ml-60 p-6 min-h-screen">
+      <div className="ml-60 md:p-6 min-h-screen">
         <Header title="Dashboard" subtitle=""/>
         <div className="mt-4">
-          <div className="flex flex-col sm:grid sm:grid-cols-12 sm:gap-4 items-start">
-            <div className="col-span-4 bg-white rounded-lg p-2 shadow-md">
+          <div className="flex flex-col items-center md:grid md:grid-cols-12 md:space-x-4 md:gap-4 md:p-0 p-2 space-y-4 md:items-start">
+            <div className="md:col-span-4 bg-white rounded-lg w-full p-2 shadow-md">
               <span className="font-semibold text-xl p-4">
                 Team Composition
               </span>
@@ -35,7 +35,7 @@ export default function Home() {
                 <TeamComposition />
               </div>
             </div>
-            <div className="col-span-5 bg-white rounded p-2 shadow-md">
+            <div className="md:col-span-5 bg-white rounded w-full p-2 shadow-md">
               <div className="flex flex-col p-4">
                 <span className="font-semibold text-xl p-4">
                   Active Survey Participation
@@ -45,7 +45,7 @@ export default function Home() {
                 <ActiveSurveyParticipation />
               </div>
             </div>
-            <div className="col-span-3 bg-white rounded-lg p-2 shadow-md">
+            <div className="md:col-span-3 bg-white rounded-lg w-full p-2 shadow-md">
               <span className="font-semibold text-xl p-4">
                 Most Recent Activity
               </span>
