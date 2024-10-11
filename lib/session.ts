@@ -1,4 +1,4 @@
-import { SessionOptions } from "iron-session";
+import { SessionOptions } from 'iron-session';
 
 export interface SessionData {
   userId: number | null;
@@ -29,14 +29,14 @@ export const defaultSession: SessionData = {
   lastname: null,
   email: null,
   team: null,
-  isLoggedIn: false,
+  isLoggedIn: false
 };
 
 export const sessionOptions: SessionOptions = {
   password: process.env.OPENSSL_KEY!,
-  cookieName: "user_session",
+  cookieName: 'user_session',
   cookieOptions: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-  },
+    secure: process.env.NODE_ENV === 'production'
+  }
 };

@@ -1,10 +1,10 @@
-import TeamDescription from "@/components/TeamDescription";
-import TeamLeader from "@/components/TeamLeader";
-import TeamComponent from "@/components/Team";
-import { Team } from "../../lib/session";
+import TeamDescription from '@/components/TeamDescription';
+import TeamLeader from '@/components/TeamLeader';
+import TeamComponent from '@/components/Team';
+import { Team } from '../../lib/session';
 
 export default function TeamInfo({
-  teaminfo,
+  teaminfo
 }: {
   teaminfo: Team | null | undefined;
 }) {

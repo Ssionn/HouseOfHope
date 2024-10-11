@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { getSessionAsPlainObject } from "../../actions/authentication";
-import UserDropdown from "@/components/UserDropdown";
+import { useEffect, useState } from 'react';
+import { getSessionAsPlainObject } from '../../actions/authentication';
+import UserDropdown from '@/components/UserDropdown';
 
 export default function Header({
   title,
-  subtitle,
+  subtitle
 }: {
   title: string;
   subtitle: string;
 }) {
-  const [session, setSession] = useState({ name: "" });
+  const [session, setSession] = useState({ name: '' });
 
   useEffect(() => {
     async function getSessionData() {
       const newSession = await getSessionAsPlainObject();
-      const name = newSession.firstname + " " + newSession.lastname;
+      const name = newSession.firstname + ' ' + newSession.lastname;
 
       const headerData = {
-        name: name,
+        name: name
       };
 
       setSession(headerData);

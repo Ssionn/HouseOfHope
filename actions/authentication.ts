@@ -1,15 +1,15 @@
-"use server";
+'use server';
 
-import * as bcrypt from "bcrypt";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import * as bcrypt from 'bcrypt';
+import { getIronSession } from 'iron-session';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import {
   checkUserExists,
   createNewUser,
-  getUserTeamWithTeamLeader,
-} from "../index";
-import { SessionData, defaultSession, sessionOptions } from "../lib/session";
+  getUserTeamWithTeamLeader
+} from '../index';
+import { SessionData, defaultSession, sessionOptions } from '../lib/session';
 
 export const getSessionAsPlainObject = async () => {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
@@ -25,14 +25,14 @@ export const getSessionAsPlainObject = async () => {
     lastname,
     email,
     team,
-    isLoggedIn,
+    isLoggedIn
   };
 
   return plainSessionObject;
 };
 
 const updateSessionFromPlainObject = async (
-  sessionData: Partial<SessionData>,
+  sessionData: Partial<SessionData>
 ) => {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
 
@@ -43,15 +43,15 @@ const updateSessionFromPlainObject = async (
 
 export const login = async (
   prevState: { error: undefined | string },
-  formData: FormData,
+  formData: FormData
 ) => {
-  const formEmail = formData.get("email") as string;
-  const formPassword = formData.get("password") as string;
+  const formEmail = formData.get('email') as string;
+  const formPassword = formData.get('password') as string;
 
   const user = await checkUserExists(formEmail);
 
   if (!user || !(await bcrypt.compare(formPassword, user?.password))) {
-    return { error: "The provided credentials do not match any records." };
+    return { error: 'The provided credentials do not match any records.' };
   }
 
   const sessionData: Partial<SessionData> = {
@@ -60,27 +60,27 @@ export const login = async (
     lastname: user?.lastname,
     email: user?.email,
     isLoggedIn: true,
-    team: await getUserTeamWithTeamLeader(user?.teamId ?? 0),
+    team: await getUserTeamWithTeamLeader(user?.teamId ?? 0)
   };
 
   await updateSessionFromPlainObject(sessionData);
-  redirect("/dashboard");
+  redirect('/dashboard');
 };
 
 export const signup = async (
   prevState: { error: undefined | string },
-  formData: FormData,
+  formData: FormData
 ) => {
-  const formFirstname = formData.get("firstname") as string;
-  const formLastname = formData.get("lastname") as string;
-  const formEmail = formData.get("email") as string;
-  const formPassword = formData.get("password") as string;
+  const formFirstname = formData.get('firstname') as string;
+  const formLastname = formData.get('lastname') as string;
+  const formEmail = formData.get('email') as string;
+  const formPassword = formData.get('password') as string;
 
   const newUser = await createNewUser(
     formFirstname,
     formLastname,
     formEmail,
-    formPassword,
+    formPassword
   );
 
   const sessionData: Partial<SessionData> = {
@@ -88,11 +88,11 @@ export const signup = async (
     firstname: newUser?.firstname,
     lastname: newUser?.lastname,
     email: newUser?.email,
-    isLoggedIn: true,
+    isLoggedIn: true
   };
 
   await updateSessionFromPlainObject(sessionData);
-  redirect("/dashboard");
+  redirect('/dashboard');
 };
 
 export const logout = async () => {
@@ -100,5 +100,5 @@ export const logout = async () => {
 
   session.destroy();
 
-  redirect("/");
+  redirect('/');
 };

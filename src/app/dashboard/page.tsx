@@ -1,11 +1,11 @@
 'use client';
 
-import Timeline from "@/components/Timeline";
-import ActiveSurveyParticipation from "@/components/ActiveSurveyParticipation";
-import TeamComposition from "@/components/TeamComposition";
-import Header from "@/components/Header";
-import { FaSpinner } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import Timeline from '@/components/Timeline';
+import ActiveSurveyParticipation from '@/components/ActiveSurveyParticipation';
+import TeamComposition from '@/components/TeamComposition';
+import Header from '@/components/Header';
+import { FaSpinner } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);

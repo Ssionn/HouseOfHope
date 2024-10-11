@@ -1,5 +1,5 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import { Prisma, PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
 import IntFilter = Prisma.IntFilter;
 
 const prisma = new PrismaClient();
@@ -8,7 +8,7 @@ async function main() {}
 
 export async function checkUserExists(email: string) {
   const user = await prisma.user.findUnique({
-    where: { email },
+    where: { email }
   });
 
   if (!user) {
@@ -19,7 +19,7 @@ export async function checkUserExists(email: string) {
 }
 
 export async function getUserTeamWithTeamLeader(
-  teamId: number | IntFilter<"Team">,
+  teamId: number | IntFilter<'Team'>
 ) {
   const team = await prisma.team.findFirst({
     where: { id: teamId },
@@ -28,10 +28,10 @@ export async function getUserTeamWithTeamLeader(
         select: {
           firstname: true,
           lastname: true,
-          email: true,
-        },
-      },
-    },
+          email: true
+        }
+      }
+    }
   });
 
   return team;
@@ -41,7 +41,7 @@ export async function createNewUser(
   formFirstname: string,
   formLastname: string,
   formEmail: string,
-  formPassword: string,
+  formPassword: string
 ) {
   const saltRounds = 12;
 
@@ -54,8 +54,8 @@ export async function createNewUser(
       lastname: formLastname,
       email: formEmail,
       password: hashedPassword,
-      role: "member",
-    },
+      role: 'member'
+    }
   });
 
   return createUser;

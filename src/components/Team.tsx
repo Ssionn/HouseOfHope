@@ -1,7 +1,7 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Team({
-  team_name,
+  team_name
 }: {
   team_name: string | null | undefined;
 }) {

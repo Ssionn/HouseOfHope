@@ -1,7 +1,7 @@
-import { Leader } from "../../lib/session";
+import { Leader } from '../../lib/session';
 
 export default function TeamLeader({
-  teamleader,
+  teamleader
 }: {
   teamleader: Leader | null | undefined;
 }) {
@@ -13,7 +13,7 @@ export default function TeamLeader({
           <ul className="list-disc mt-2">
             <li className="ml-4">
               <p className="text-md font-semibold">
-                {teamleader?.firstname + " " + teamleader?.lastname}
+                {teamleader?.firstname + ' ' + teamleader?.lastname}
               </p>
             </li>
           </ul>

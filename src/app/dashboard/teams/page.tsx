@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import TeamInfo from "@/components/TeamInfo";
-import Header from "@/components/Header";
-import { useEffect, useState } from "react";
-import { getSessionAsPlainObject } from "../../../../actions/authentication";
-import { FaSpinner } from "react-icons/fa6";
-import { SessionData } from "../../../../lib/session";
+import TeamInfo from '@/components/TeamInfo';
+import Header from '@/components/Header';
+import { useEffect, useState } from 'react';
+import { getSessionAsPlainObject } from '../../../../actions/authentication';
+import { FaSpinner } from 'react-icons/fa6';
+import { SessionData } from '../../../../lib/session';
 
 export default function Teams() {
   const [data, setData] = useState<SessionData | null>(null);

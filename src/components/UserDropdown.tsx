@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   DropdownMenu,
@@ -6,14 +6,14 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { FaBell, FaUser } from "react-icons/fa6";
-import Link from "next/link";
-import { logout } from "../../actions/authentication";
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { FaBell, FaUser } from 'react-icons/fa6';
+import Link from 'next/link';
+import { logout } from '../../actions/authentication';
 
 export default function UserDropdown({
-  session,
+  session
 }: {
   session: { name: string };
 }) {

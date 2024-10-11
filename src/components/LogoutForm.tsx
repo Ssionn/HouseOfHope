@@ -1,4 +1,4 @@
-import { logout } from "../../actions/authentication";
+import { logout } from '../../actions/authentication';
 
 export default function LogoutForm() {
   return (

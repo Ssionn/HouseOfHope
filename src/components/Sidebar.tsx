@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import Navlink from "@/components/Navlink";
-import { FaHouse, FaUsers } from "react-icons/fa6";
+import Link from 'next/link';
+import Image from 'next/image';
+import Navlink from '@/components/Navlink';
+import { FaHouse, FaUsers } from 'react-icons/fa6';
 
 export default function Sidebar() {
   return (

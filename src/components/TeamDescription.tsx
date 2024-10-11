@@ -1,5 +1,5 @@
 export default function TeamDescription({
-  team_description,
+  team_description
 }: {
   team_description: string | null | undefined;
 }) {

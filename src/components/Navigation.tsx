@@ -1,11 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
-import { getSessionAsPlainObject } from "../../actions/authentication";
-import LogoutForm from "./LogoutForm";
+import Link from 'next/link';
+import Image from 'next/image';
+import { getSessionAsPlainObject } from '../../actions/authentication';
+import LogoutForm from './LogoutForm';
 
 const NavigationLink = ({
   href,
-  children,
+  children
 }: {
   href: string;
   children: any;
