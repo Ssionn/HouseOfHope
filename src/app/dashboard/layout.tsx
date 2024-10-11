@@ -2,7 +2,7 @@ import { Noto_Sans_Mono } from 'next/font/google';
 import '.././globals.css';
 import Sidebar from '@/components/Sidebar';
 import { getSessionAsPlainObject } from '../../../actions/authentication';
-import { NextResponse } from 'next/server';
+import { redirect } from 'next/navigation';
 
 const NotoSansMono = Noto_Sans_Mono({
   subsets: ['latin'],
@@ -16,8 +16,8 @@ export default async function DashboardLayout({
 }>) {
   const session = await getSessionAsPlainObject();
 
-  if (!session.isLoggedIn) {
-    new NextResponse('/login');
+  if (session.isLoggedIn === false) {
+    redirect('/login');
   }
 
   return (
