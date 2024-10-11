@@ -3,7 +3,6 @@
 import TeamInfo from "@/components/TeamInfo";
 import Header from "@/components/Header";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { getSessionAsPlainObject } from "../../../../actions/authentication";
 import { FaSpinner } from "react-icons/fa6";
 import { SessionData } from "../../../../lib/session";
@@ -11,7 +10,6 @@ import { SessionData } from "../../../../lib/session";
 export default function Teams() {
   const [data, setData] = useState<SessionData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     async function getSessionData() {
@@ -22,7 +20,7 @@ export default function Teams() {
     }
 
     getSessionData();
-  }, [router]);
+  }, []);
 
   if (isLoading) {
     return (
