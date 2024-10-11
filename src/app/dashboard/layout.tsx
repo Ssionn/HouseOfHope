@@ -1,31 +1,30 @@
-import type { Metadata } from 'next';
 import { Noto_Sans_Mono } from 'next/font/google';
 import '.././globals.css';
 import Sidebar from '@/components/Sidebar';
+import { getSessionAsPlainObject } from '../../../actions/authentication';
+import { NextResponse } from 'next/server';
 
 const NotoSansMono = Noto_Sans_Mono({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800']
+  weight: ['400', '700']
 });
 
-export const metadata: Metadata = {
-  title: 'House of Hope'
-};
-
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className={NotoSansMono.className}>
-      <body className="antialiased">
-        <header>
-          <Sidebar />
-        </header>
+  const session = await getSessionAsPlainObject();
 
-        <main>{children}</main>
-      </body>
-    </html>
+  if (!session.isLoggedIn) {
+    new NextResponse('/login');
+  }
+
+  return (
+    <div className={NotoSansMono.className}>
+      <Sidebar />
+
+      {children}
+    </div>
   );
 }

@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={NotoSansMono.className}>
-      <body className="antialiased bg-[#F5F5F5]">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
