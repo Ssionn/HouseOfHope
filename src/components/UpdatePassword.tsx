@@ -1,6 +1,6 @@
 export default function UpdatePassword() {
   return (
-    <div className="mb-8 max-w-2xl mx-auto bg-white p-4 rounded-md shadow-sm">
+    <div className="mb-8 max-w-2xl mx-auto bg-white p-4 rounded-md shadow-md">
       <h2 className="text-xl font-semibold mb-4">Update Password</h2>
 
       <div className="flex flex-col items-center space-y-4">

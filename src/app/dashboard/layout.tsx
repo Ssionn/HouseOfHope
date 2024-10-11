@@ -16,7 +16,7 @@ export default async function DashboardLayout({
 }>) {
   const session = await getSessionAsPlainObject();
 
-  if (session.isLoggedIn === false) {
+  if (!session.isLoggedIn) {
     redirect('/login');
   }
 

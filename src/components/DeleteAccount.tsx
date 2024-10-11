@@ -1,6 +1,6 @@
 export default function DeleteAccount() {
   return (
-    <div className="max-w-2xl mx-auto bg-white p-4 rounded-md shadow-sm">
+    <div className="max-w-2xl mx-auto bg-white p-4 rounded-md shadow-md">
       <h2 className="text-xl font-semibold mb-2 text-red-600">
         Delete Account
       </h2>
