@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Timeline from "@/components/Timeline";
 import ActiveSurveyParticipation from "@/components/ActiveSurveyParticipation";

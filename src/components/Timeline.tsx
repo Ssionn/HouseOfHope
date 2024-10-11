@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 const TimelineItem = ({ time, name, action }) => (
   <div className="relative flex items-start mb-4">

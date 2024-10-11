@@ -41,9 +41,9 @@ const options = {
   scales: {
     y: {
       beginAtZero: true,
-      max: 100,
-    },
-  },
+      max: 100
+    }
+  }
 };
 
 export default function ActiveSurveyParticipation() {

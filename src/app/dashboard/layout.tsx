@@ -23,6 +23,7 @@ export default async function DashboardLayout({
   return (
     <div className={NotoSansMono.className}>
       <Sidebar />
+      
       {children}
     </div>
   );
