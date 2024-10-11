@@ -1,16 +1,16 @@
-import {NextRequest, NextResponse} from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 import { getSessionAsPlainObject } from "./actions/authentication";
 
 export async function middleware(req: NextRequest) {
-    const session = await getSessionAsPlainObject();
+  const session = await getSessionAsPlainObject();
 
-    if (! session.isLoggedIn) {
-        return NextResponse.redirect(new URL('/login', req.url))
-    }
+  if (!session.isLoggedIn) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 
-    return NextResponse.next();
+  return NextResponse.next();
 }
 
 export const config = {
-    matcher: ['/dashboard', '/dashboard/:path*'],
-}
+  matcher: ["/dashboard", "/dashboard/:path*"],
+};
