@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.prettierignore
+
+# DO NOT CHANGE!
+/.env
+.env
+.idea
+install.log*
