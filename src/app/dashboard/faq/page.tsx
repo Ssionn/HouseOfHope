@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { getQuestions } from '../../../../actions/faq';
 
 export default function FaqPage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [faqData, setFaqData] = useState([]);
+  const [faqData, setFaqData] = useState<object | null | undefined>(null);
 
   const toggleAccordion = (index: number) => {
     if (activeIndex === index) {
@@ -16,9 +17,7 @@ export default function FaqPage() {
   useEffect(() => {
     try {
         async function getFaqQuestions() {
-            const questions = await prisma.faq.findMany({
-                where: {},
-            });
+            const questions = await getQuestions();
 
             setFaqData(questions);
         }
@@ -33,9 +32,9 @@ export default function FaqPage() {
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-4xl font-bold text-center mb-8">FAQs</h1>
       <div className="space-y-4">
-        {faqData.map((faq, index) => (
+      {faqData && Object.entries(faqData).map(([key, faq], index) => (
           <div
-            key={index}
+            key={key}
             className="border border-gray-200 rounded-lg"
           >
             <button

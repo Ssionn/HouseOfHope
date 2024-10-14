@@ -6,57 +6,51 @@ const saltRounds = 12;
 const password: string = process.env.SEEDER_PASSWORD!;
 
 async function main() {
-    bcrypt.genSalt(saltRounds, (err: Error|undefined, salt: string) => {
-        if (err) return console.error(err);
+  if (!password) {
+    console.error('Seeder password is not set in environment variables.');
+    process.exit(1);
+  }
 
-        bcrypt.hash(password, salt, async (err: Error|undefined, hash: string) => {
-            if (err) return console.error(err);
+  try {
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(password, salt);
 
-            try {
-                const casper = await prisma.user.upsert({
-                    where: { email: 'casper@houseofhope.com' },
-                    update: {},
-                    create: {
-                        name: 'Casper',
-                        email: 'casper@houseofhope.com',
-                        password: hash,
-                        role: "admin",
-                    },
-                });
-
-                const andy = await prisma.user.upsert({
-                    where: { email: 'andy@houseofhope.com' },
-                    update: {},
-                    create: {
-                        name: 'Andy',
-                        email: 'andy@houseofhope.com',
-                        password: hash,
-                        role: "admin",
-                    },
-                });
-
-                const ivano = await prisma.user.upsert({
-                    where: { email: 'ivano@houseofhope.com' },
-                    update: {},
-                    create: {
-                        name: 'Ivano',
-                        email: 'ivano@houseofhope.com',
-                        password: hash,
-                        role: "admin",
-                    },
-                });
-
-                console.log('User created/updated:', casper);
-                console.log('User created/updated:', andy);
-                console.log('User created/updated:', ivano);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await prisma.$disconnect();
-            }
-        });
+    const casper = await prisma.user.upsert({
+      where: { email: 'casper@houseofhope.com' },
+      update: {},
+      create: {
+        firstname: 'Casper',
+        lastname: 'Kizewski',
+        email: 'casper@houseofhope.com',
+        password: hash,
+        role: 'admin'
+      }
     });
 
+    const andy = await prisma.user.upsert({
+        where: { email: 'andy@houseofhope.com' },
+        update: {},
+        create: {
+          firstname: 'Andy',
+          lastname: 'Hoang',
+          email: 'andy@houseofhope.com',
+          password: hash,
+          role: 'admin'
+        }
+      });
+  
+      const ivano = await prisma.user.upsert({
+        where: { email: 'ivano@houseofhope.com' },
+        update: {},
+        create: {
+          firstname: 'Ivano',
+          lastname: 'Baptista',
+          email: 'ivano@houseofhope.com',
+          password: hash,
+          role: 'admin'
+        }
+      });
+  
     const memberQuestions = [
         {
             id: 1,
@@ -133,13 +127,82 @@ async function main() {
 
         console.log("Question: " + questions.id + " Added.");
     }
+
+    console.log('Users created/updated:', { casper, andy, ivano });
+  } catch (error) {
+    console.error('Error creating users:', error);
+    process.exit(1);
+  }
 }
 
-main()
-    .catch((e) => {
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
+async function teamSeed() {
+  try {
+    const casper = await prisma.user.findUnique({
+      where: { email: 'casper@houseofhope.com' }
     });
+    const andy = await prisma.user.findUnique({
+      where: { email: 'andy@houseofhope.com' }
+    });
+    const ivano = await prisma.user.findUnique({
+      where: { email: 'ivano@houseofhope.com' }
+    });
+
+    if (!casper || !andy || !ivano) {
+      console.error('One or more users not found.');
+      process.exit(1);
+    }
+
+    const developmentTeam = await prisma.team.upsert({
+      where: { name: 'Development Team' },
+      update: {},
+      create: {
+        name: 'Development Team',
+        description: 'Team responsible for product development.',
+        leader: { connect: { id: casper.id } }
+      }
+    });
+
+    await prisma.user.update({
+      where: { id: casper.id },
+      data: {
+        team: { connect: { id: developmentTeam.id } },
+        teamRole: 'team_leader'
+      }
+    });
+
+    await prisma.user.update({
+      where: { id: andy.id },
+      data: {
+        team: { connect: { id: developmentTeam.id } },
+        teamRole: 'member'
+      }
+    });
+
+    await prisma.user.update({
+      where: { id: ivano.id },
+      data: {
+        team: { connect: { id: developmentTeam.id } },
+        teamRole: 'member'
+      }
+    });
+
+    console.log('Team created/updated:', developmentTeam);
+  } catch (error) {
+    console.error('Error seeding team:', error);
+    process.exit(1);
+  }
+}
+
+async function seed() {
+  await main();
+  await teamSeed();
+}
+
+seed()
+  .catch((error) => {
+    console.error('Error in seeding process:', error);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

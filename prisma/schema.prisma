@@ -14,15 +14,23 @@ datasource db {
 }
 
 model User {
-  id             Int          @id @default(autoincrement())
-  name           String
-  email          String       @unique
+  id             Int     @id @default(autoincrement())
+  firstname      String
+  lastname       String
+  email          String  @unique
   password       String
   provider       String?
   provider_token String?
   role           Role
-  surveys        SurveyUser[]
-  Survey         Survey[]
+
+  surveys SurveyUser[]
+  Survey  Survey[]
+
+  teamLeaderOf Team[] @relation("TeamLeader")
+  team         Team?  @relation("TeamMembers", fields: [teamId], references: [id])
+  teamId       Int?
+
+  teamRole Role?
 }
 
 model Survey {
@@ -70,6 +78,20 @@ model Faq {
   faq_question    String
   faq_description String @db.VarChar(2000)
   faq_role        Role
+}
+
+model Team {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  description String?
+
+  leaderId Int
+  leader   User @relation("TeamLeader", fields: [leaderId], references: [id])
+
+  members User[] @relation("TeamMembers")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {
