@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
+    <div className="flex flex-col justify-center items-center mt-48">
       <Image
         src="/images/logo.svg"
         alt="House of Hope Logo"
@@ -23,13 +23,13 @@ export default function Error({
         width={96}
         className="h-24 w-24"
       />
-      <h1 className="text-xl font-bold">Something went wrong!</h1>
+      <h1 className="text-xl font-bold">Iets ging verkeerd!</h1>
       <p className="mt-4">{error.message}</p>
       <button
         onClick={reset}
-        className="py-1 px-6 border-1 bg-black text-white rounded shadow-xl mt-4"
+        className="py-1 px-6 border-1 bg-black text-white rounded shadow-xl mt-4 transition ease-in-out hover:scale-110"
       >
-        Try Again
+        Probeer opnieuw
       </button>
     </div>
   );

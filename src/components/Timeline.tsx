@@ -1,6 +1,14 @@
 'use client';
 
-const TimelineItem = ({ time, name, action }) => (
+const TimelineItem = ({
+  time,
+  name,
+  action
+}: {
+  time: string;
+  name: string;
+  action: string;
+}) => (
   <div className="relative flex items-start mb-4">
     <div className="absolute flex justify-center items-center h-full border-l-[3px] border-purple-300"></div>
 

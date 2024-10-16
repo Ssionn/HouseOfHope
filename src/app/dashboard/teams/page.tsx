@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getSessionAsPlainObject } from '../../../../actions/authentication';
 import { FaSpinner } from 'react-icons/fa6';
 import { SessionData } from '../../../../lib/session';
+import TeamList from '@/components/TeamList';
 
 export default function Teams() {
   const [data, setData] = useState<SessionData | null>(null);
@@ -30,12 +31,20 @@ export default function Teams() {
     );
   }
 
+  if (!data?.team) {
+    throw new Error('Geen team gevonden.');
+  }
+
   return (
     <>
-      <div className="ml-60 p-6">
+      <div>
         <Header title="Teams" subtitle="" />
         <div className="flex flex-col sm:flex-row space-x-4 items-center mt-4">
-          <TeamInfo teaminfo={data?.team} />
+          <TeamInfo teamInfo={data?.team} />
+        </div>
+        <div className="mt-8">
+          {/* Members does exist on team. */}
+          <TeamList members={data?.team?.members} userId={data?.userId} />
         </div>
       </div>
     </>

@@ -10,13 +10,11 @@ export default function TeamLeader({
       <ul className="list-none space-y-2">
         <li>
           <h1 className="text-lg font-semibold">Team leader:</h1>
-          <ul className="list-disc mt-2">
-            <li className="ml-4">
-              <p className="text-md font-semibold">
-                {teamleader?.firstname + ' ' + teamleader?.lastname}
-              </p>
-            </li>
-          </ul>
+          <div className="mt-2">
+            <span className="hover:bg-gray-100 rounded-md p-1">
+              {teamleader?.firstname + ' ' + teamleader?.lastname}
+            </span>
+          </div>
         </li>
       </ul>
     </div>

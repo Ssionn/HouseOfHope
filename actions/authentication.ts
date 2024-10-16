@@ -1,7 +1,7 @@
 'use server';
 
 import * as bcrypt from 'bcrypt';
-import { getIronSession } from 'iron-session';
+import { getIronSession, IronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import {
@@ -12,7 +12,10 @@ import {
 import { SessionData, defaultSession, sessionOptions } from '../lib/session';
 
 export const getSessionAsPlainObject = async () => {
-  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
+  const session: IronSession<SessionData> = await getIronSession<SessionData>(
+    cookies(),
+    sessionOptions
+  );
 
   if (!session.isLoggedIn) {
     session.isLoggedIn = defaultSession.isLoggedIn;
@@ -34,7 +37,10 @@ export const getSessionAsPlainObject = async () => {
 const updateSessionFromPlainObject = async (
   sessionData: Partial<SessionData>
 ) => {
-  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
+  const session: IronSession<SessionData> = await getIronSession<SessionData>(
+    cookies(),
+    sessionOptions
+  );
 
   Object.assign(session, sessionData);
 

@@ -27,7 +27,7 @@ export default function Header({
   }, []);
 
   return (
-    <div className="inline-flex justify-between items-center w-full">
+    <div className="inline-flex justify-between items-center w-full p-4 sm:p-2 md:p-0">
       <div>
         <h2 className="text-2xl font-bold">{title}</h2>
         <span className="text-2XL">{subtitle}</span>
