@@ -1,8 +1,6 @@
 import { Noto_Sans_Mono } from 'next/font/google';
 import '.././globals.css';
 import Sidebar from '@/components/Sidebar';
-import { getSessionAsPlainObject } from '../../../actions/authentication';
-import { redirect } from 'next/navigation';
 
 const NotoSansMono = Noto_Sans_Mono({
   subsets: ['latin'],
@@ -14,17 +12,11 @@ export default async function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getSessionAsPlainObject();
-
-  if (!session.isLoggedIn) {
-    redirect('/login');
-  }
-
   return (
     <div className={NotoSansMono.className}>
       <Sidebar />
 
-      {children}
+      <div className="sm:ml-64 p-6">{children}</div>
     </div>
   );
 }

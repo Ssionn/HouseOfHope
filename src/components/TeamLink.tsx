@@ -1,6 +1,12 @@
 import Link from 'next/link';
 
-export default function TeamLink({ href, children }) {
+export default function TeamLink({
+  href,
+  children
+}: {
+  href: string;
+  children: any;
+}) {
   return (
     <Link
       href={href}

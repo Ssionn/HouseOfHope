@@ -1,4 +1,5 @@
 import { SessionOptions } from 'iron-session';
+import { Role } from '@prisma/client';
 
 export interface SessionData {
   userId: number | null;
@@ -15,6 +16,13 @@ export interface Team {
   description: string | null;
   leader: Leader | null;
   leaderId: number | null;
+  members: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    teamRole: Role | null;
+  }[];
 }
 
 export interface Leader {

@@ -1,6 +1,7 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { $Enums, Prisma, PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import IntFilter = Prisma.IntFilter;
+import Role = $Enums.Role;
 
 const prisma = new PrismaClient();
 
@@ -30,9 +31,29 @@ export async function getUserTeamWithTeamLeader(
           lastname: true,
           email: true
         }
+      },
+      members: {
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          email: true,
+          teamRole: true
+        }
       }
     }
   });
+
+  if (team) {
+    team.members = team.members.map((member) => ({
+      ...member,
+      teamRole: member.teamRole
+        ? (member.teamRole
+            .replace('_', '')
+            .replace(/(^\w|\s\w)/g, (m: string) => m.toUpperCase()) as Role)
+        : null
+    }));
+  }
 
   return team;
 }

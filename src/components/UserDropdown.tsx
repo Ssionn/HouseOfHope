@@ -31,14 +31,14 @@ export default function UserDropdown({
           <DropdownMenuSeparator />
           <Link href="/dashboard/settings">
             <DropdownMenuItem className="cursor-pointer">
-              Settings
+              Instellingen
             </DropdownMenuItem>
           </Link>
           <DropdownMenuItem
             onClick={async () => logout()}
             className="cursor-pointer"
           >
-            Logout
+            Uitloggen
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
