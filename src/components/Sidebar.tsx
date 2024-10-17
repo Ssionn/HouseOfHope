@@ -6,7 +6,7 @@ import { FaHouse, FaUsers } from 'react-icons/fa6';
 export default function Sidebar() {
   return (
     <>
-      <div className="m-0 p-0 fixed w-60 rounded-br-lg bg-white h-full overflow-auto border-r">
+      <div className="m-0 p-0 fixed md:w-60 rounded-br-lg bg-white h-full overflow-auto border-r z-50">
         <div className="w-full p-2">
           <div className="flex justify-center items-center">
             <Link href="/" aria-label="Home" className="mt-4">
