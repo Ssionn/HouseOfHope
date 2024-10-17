@@ -1,8 +1,8 @@
 export default function UpdatePassword() {
     return (
+      <form>
         <div className="mb-8 max-w-2xl mx-auto bg-white p-4 rounded-md shadow-sm">
           <h2 className="text-xl font-semibold mb-4">Update Password</h2>
-
           <div className="flex flex-col items-center space-y-4">
             <input type="password" id="new-password" className="p-2 w-full rounded-md border-solid border-[1px] border-gray-200 placeholder:text-sm" placeholder="Enter new password"/>
             <input type="password" id="confirm-password" className="p-2 w-full rounded-md border-solid border-[1px] border-gray-200 placeholder:text-sm" placeholder="Confirm new password"/>
@@ -14,5 +14,6 @@ export default function UpdatePassword() {
             </button>
           </div>
         </div>
+      </form>
     );
 }
