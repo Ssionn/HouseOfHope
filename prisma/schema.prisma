@@ -21,7 +21,6 @@ model User {
   password       String
   provider       String?
   provider_token String?
-  role           Role
 
   surveys SurveyUser[]
   Survey  Survey[]
@@ -30,7 +29,22 @@ model User {
   team         Team?  @relation("TeamMembers", fields: [teamId], references: [id])
   teamId       Int?
 
-  teamRole Role?
+  role   Role? @relation(fields: [roleId], references: [id])
+  roleId Int?
+}
+
+model Role {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  user       User[]
+  permission Permission[]
+}
+
+model Permission {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  Role   Role?  @relation(fields: [roleId], references: [id])
+  roleId Int?
 }
 
 model Survey {
@@ -85,10 +99,4 @@ model Team {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-enum Role {
-  admin
-  team_leader
-  member
 }

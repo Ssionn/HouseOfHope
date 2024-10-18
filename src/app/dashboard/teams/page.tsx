@@ -16,6 +16,8 @@ export default function Teams() {
     async function getSessionData() {
       const sessionData = await getSessionAsPlainObject();
 
+      console.log(sessionData);
+
       setData(sessionData);
       setIsLoading(false);
     }
@@ -35,6 +37,10 @@ export default function Teams() {
     throw new Error('Geen team gevonden.');
   }
 
+  if (!data?.team?.members) {
+    throw new Error('Geen leden gevonden.');
+  }
+
   return (
     <>
       <div>
@@ -43,7 +49,6 @@ export default function Teams() {
           <TeamInfo teamInfo={data?.team} />
         </div>
         <div className="mt-8">
-          {/* Members does exist on team. */}
           <TeamList members={data?.team?.members} userId={data?.userId} />
         </div>
       </div>

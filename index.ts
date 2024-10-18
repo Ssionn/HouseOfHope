@@ -1,7 +1,6 @@
-import { $Enums, Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import IntFilter = Prisma.IntFilter;
-import Role = $Enums.Role;
 
 const prisma = new PrismaClient();
 
@@ -38,22 +37,11 @@ export async function getUserTeamWithTeamLeader(
           firstname: true,
           lastname: true,
           email: true,
-          teamRole: true
+          role: true
         }
       }
     }
   });
-
-  if (team) {
-    team.members = team.members.map((member) => ({
-      ...member,
-      teamRole: member.teamRole
-        ? (member.teamRole
-            .replace('_', '')
-            .replace(/(^\w|\s\w)/g, (m: string) => m.toUpperCase()) as Role)
-        : null
-    }));
-  }
 
   return team;
 }
@@ -69,13 +57,17 @@ export async function createNewUser(
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPassword = await bcrypt.hash(formPassword, salt);
 
+  const memberRole = await prisma.role.findUnique({
+    where: { name: 'Member' }
+  });
+
   const createUser = await prisma.user.create({
     data: {
       firstname: formFirstname,
       lastname: formLastname,
       email: formEmail,
       password: hashedPassword,
-      role: 'member'
+      role: { connect: { id: memberRole?.id } }
     }
   });
 

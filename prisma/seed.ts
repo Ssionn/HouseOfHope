@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -15,6 +15,30 @@ async function main() {
     const salt = await bcrypt.genSalt(saltRounds);
     const hash = await bcrypt.hash(password, salt);
 
+    await prisma.role.upsert({
+      where: { name: 'Admin' },
+      update: {},
+      create: {
+        name: 'Admin'
+      }
+    });
+
+    const teamLeaderRole = await prisma.role.upsert({
+      where: { name: 'Teamleader' },
+      update: {},
+      create: {
+        name: 'Teamleader'
+      }
+    });
+
+    const memberRole = await prisma.role.upsert({
+      where: { name: 'Member' },
+      update: {},
+      create: {
+        name: 'Member'
+      }
+    });
+
     const casper = await prisma.user.upsert({
       where: { email: 'casper@houseofhope.com' },
       update: {},
@@ -23,7 +47,7 @@ async function main() {
         lastname: 'Kizewski',
         email: 'casper@houseofhope.com',
         password: hash,
-        role: 'admin'
+        role: { connect: { id: teamLeaderRole.id } }
       }
     });
 
@@ -35,7 +59,7 @@ async function main() {
         lastname: 'Hoang',
         email: 'andy@houseofhope.com',
         password: hash,
-        role: 'admin'
+        role: { connect: { id: memberRole.id } }
       }
     });
 
@@ -47,7 +71,7 @@ async function main() {
         lastname: 'Baptista',
         email: 'ivano@houseofhope.com',
         password: hash,
-        role: 'admin'
+        role: { connect: { id: memberRole.id } }
       }
     });
 
@@ -63,9 +87,11 @@ async function teamSeed() {
     const casper = await prisma.user.findUnique({
       where: { email: 'casper@houseofhope.com' }
     });
+
     const andy = await prisma.user.findUnique({
       where: { email: 'andy@houseofhope.com' }
     });
+
     const ivano = await prisma.user.findUnique({
       where: { email: 'ivano@houseofhope.com' }
     });
@@ -88,24 +114,21 @@ async function teamSeed() {
     await prisma.user.update({
       where: { id: casper.id },
       data: {
-        team: { connect: { id: developmentTeam.id } },
-        teamRole: 'team_leader'
+        team: { connect: { id: developmentTeam.id } }
       }
     });
 
     await prisma.user.update({
       where: { id: andy.id },
       data: {
-        team: { connect: { id: developmentTeam.id } },
-        teamRole: 'member'
+        team: { connect: { id: developmentTeam.id } }
       }
     });
 
     await prisma.user.update({
       where: { id: ivano.id },
       data: {
-        team: { connect: { id: developmentTeam.id } },
-        teamRole: 'member'
+        team: { connect: { id: developmentTeam.id } }
       }
     });
 
@@ -116,9 +139,91 @@ async function teamSeed() {
   }
 }
 
+async function permissionSeed() {
+  const teamleaderRole = await prisma.role.upsert({
+    where: { name: 'Teamleader' },
+    update: {},
+    create: {
+      name: 'Teamleader'
+    }
+  });
+
+  const adminRole = await prisma.role.upsert({
+    where: { name: 'Admin' },
+    update: {},
+    create: {
+      name: 'Admin'
+    }
+  });
+
+  await prisma.permission.createMany({
+    data: [
+      { name: 'isPro' }, // eventually for the paid tier
+      { name: 'isVerified' }, // email verified
+      { name: 'edit_team_list' }, // is a teamleader and is able to invite/remove members
+      { name: 'delete_team' }, // is able to delete the team as a teamleader
+      { name: 'isAdmin' } // admin is able to do everything, but isn't allowed to look at the teams page.
+    ],
+    skipDuplicates: true
+  });
+
+  const updatePermissions = await prisma.permission.updateMany({
+    where: {
+      name: {
+        in: ['edit_team_list', 'delete_team']
+      }
+    },
+    data: {
+      roleId: teamleaderRole.id
+    }
+  });
+
+  const permissionsToAssignToTeamleader = await prisma.permission.findMany({
+    where: {
+      name: {
+        in: ['edit_team_list', 'delete_team']
+      }
+    }
+  });
+
+  const permissionsToAssignToAdmin = await prisma.permission.findMany({
+    where: {
+      name: {
+        in: ['isAdmin']
+      }
+    }
+  });
+
+  const updatedTeamLeaderRole = await prisma.role.update({
+    where: { id: teamleaderRole.id },
+    data: {
+      permission: {
+        connect: permissionsToAssignToTeamleader.map((permission) => ({
+          id: permission.id
+        }))
+      }
+    }
+  });
+
+  const updatedAdminRole = await prisma.role.update({
+    where: { id: adminRole.id },
+    data: {
+      permission: {
+        connect: permissionsToAssignToAdmin.map((permission) => ({
+          id: permission.id
+        }))
+      }
+    }
+  });
+
+  console.log('Permissions assigned to Admin:', updatedAdminRole);
+  console.log('Permissions assigned to Teamleader:', updatedTeamLeaderRole);
+}
+
 async function seed() {
   await main();
   await teamSeed();
+  await permissionSeed();
 }
 
 seed()

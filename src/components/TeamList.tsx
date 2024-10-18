@@ -40,7 +40,7 @@ export default function TeamList({
                   )}
                 </TableCell>
                 <TableCell>{member.email}</TableCell>
-                <TableCell>{member.teamRole}</TableCell>
+                <TableCell>{member.role.name}</TableCell>
               </TableRow>
             ))}
           </TableBody>
