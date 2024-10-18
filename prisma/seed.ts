@@ -51,7 +51,7 @@ async function main() {
       }
     });
 
-    console.log('Users created/updated:', { casper, andy, ivano });
+    console.log('\n Users seeded \n');
   } catch (error) {
     console.error('Error creating users:', error);
     process.exit(1);
@@ -109,7 +109,7 @@ async function teamSeed() {
       }
     });
 
-    console.log('Team created/updated:', developmentTeam);
+    console.log('\n Team seeded \n');
   } catch (error) {
     console.error('Error seeding team:', error);
     process.exit(1);
