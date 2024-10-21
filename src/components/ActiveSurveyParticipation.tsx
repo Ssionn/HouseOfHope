@@ -31,7 +31,7 @@ const data = {
   ]
 };
 
-const options = {
+const options: object = {
   responsive: true,
   plugins: {
     legend: {

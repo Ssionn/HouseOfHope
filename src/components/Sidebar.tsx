@@ -52,7 +52,7 @@ export default function Sidebar() {
                   width={64}
                   height={64}
                   alt="House of Hope"
-                  className="cursor-pointer"
+                  className="cursor-pointer w-12 h-12"
                   priority={true}
                 />
               </Link>

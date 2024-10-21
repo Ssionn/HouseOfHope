@@ -15,12 +15,29 @@ export interface Team {
   description: string | null;
   leader: Leader | null;
   leaderId: number | null;
+  members: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: Role | null;
+  }[];
 }
 
 export interface Leader {
   email: string | null;
   firstname: string | null;
   lastname: string | null;
+}
+
+export interface Role {
+  id: number | null;
+  name: string | null;
+  permission: {
+    id: number | null;
+    name: string | null;
+    roleId: number | null;
+  }[];
 }
 
 export const defaultSession: SessionData = {

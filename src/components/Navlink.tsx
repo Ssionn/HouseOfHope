@@ -3,7 +3,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const Navlink = ({ href, children, className = '' }) => {
+const Navlink = ({
+  href,
+  children,
+  className = ''
+}: {
+  href: string;
+  children: any;
+  className?: string;
+}) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 

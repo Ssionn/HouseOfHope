@@ -42,6 +42,15 @@ export async function getUserTeamWithTeamLeader(
           lastname: true,
           email: true
         }
+      },
+      members: {
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          email: true,
+          role: true
+        }
       }
     }
   });
@@ -60,13 +69,17 @@ export async function createNewUser(
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPassword = await bcrypt.hash(formPassword, salt);
 
+  const memberRole = await prisma.role.findUnique({
+    where: { name: 'Member' }
+  });
+
   const createUser = await prisma.user.create({
     data: {
       firstname: formFirstname,
       lastname: formLastname,
       email: formEmail,
       password: hashedPassword,
-      role: 'member'
+      role: { connect: { id: memberRole?.id } }
     }
   });
 

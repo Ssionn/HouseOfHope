@@ -23,22 +23,20 @@ export default function Home() {
   }
 
   return (
-    <div className="ml-60 md:p-6 min-h-screen">
+    <div>
       <Header title="Dashboard" subtitle="" />
       <div className="mt-4">
-        <div className="flex flex-col items-center md:grid md:grid-cols-12 md:space-x-4 md:gap-4 md:p-0 p-2 space-y-4 md:items-start">
+        <div className="flex flex-col items-center md:items-start md:grid md:grid-cols-12 md:space-x-4 md:gap-4 md:p-0 p-2 space-y-4">
           <div className="md:col-span-4 bg-white rounded-lg w-full p-2 shadow-md">
             <span className="font-semibold text-xl p-4">Team Composition</span>
             <div className="mt-4">
               <TeamComposition />
             </div>
           </div>
-          <div className="md:col-span-5 bg-white rounded w-full p-2 shadow-md">
-            <div className="flex flex-col p-4">
-              <span className="font-semibold text-xl p-4">
-                Active Survey Participation
-              </span>
-            </div>
+          <div className="md:col-span-5 bg-white rounded-lg w-full p-2 shadow-md">
+            <span className="font-semibold text-xl p-4">
+              Active Survey Participation
+            </span>
             <div className="mt-4">
               <ActiveSurveyParticipation />
             </div>
